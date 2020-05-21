@@ -1,6 +1,6 @@
 resource "aws_security_group" "sg" {
   name = "${var.name}-sg"
-  vpc_id = "${var.main.vpc_id}"
+  vpc_id = "${aws_vpc.main.vpc_id}"
   description = "Allow all inbound traffic"
   ingress {
       from_port = 22
