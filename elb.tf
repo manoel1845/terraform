@@ -1,4 +1,4 @@
-
+/*
 resource "aws_elb" "elb" {
   name = "${var.name}"
   security_groups = [ "${aws_security_group.sg.id}" ]
@@ -24,3 +24,4 @@ resource "aws_elb" "elb" {
     Environment = "${var.environment}"
   }
 }
+*/
