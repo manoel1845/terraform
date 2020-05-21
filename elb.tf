@@ -19,8 +19,4 @@ resource "aws_elb" "elb" {
     target = "TCP:80/check"
     interval = 5
   }
-  tags {
-    Name = "${var.name}"
-    Environment = "${var.environment}"
-  }
 }
