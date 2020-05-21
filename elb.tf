@@ -24,4 +24,3 @@ resource "aws_elb" "elb" {
     Environment = "${var.environment}"
   }
 }
-*/
