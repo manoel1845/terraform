@@ -3,7 +3,7 @@ resource "aws_elb" "elb" {
   name = "elb_web"
   security_groups = aws_security_group.sg-elb.id
   cross_zone_load_balancing = true
-  subnets = ["${aws_subnet.subnet_a.elb.id}", "${aws_subnet.subnet_c.elb.id}"]
+  subnets = aws_subnet.subnet_a.elb.id, aws_subnet.subnet_c.elb.id
  # instances = ["${aws_instance.web-instance.id}"]
 
   listener {
@@ -18,7 +18,7 @@ resource "aws_lb_target_group" "elb-tg" {
   name     = "elb-tg"
   port     = 80
   protocol = "HTTP"
-  vpc_id   = aws_vpc.vpc-main.id
+  vpc_id   = aws_vpc.main.id
 
   health_check = {
     path = "/"
