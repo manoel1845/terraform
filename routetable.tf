@@ -12,11 +12,11 @@ resource "aws_route_table" "rt_public" {
 }
 
 resource "aws_route_table_association" "rta_public_a" {
-  subnet_id      = aws_subnet.subnet_a.id
-  route_table_id = aws_route_table.rt_public.id
+  subnet_id      = "${aws_subnet.subnet_a.id}"
+  route_table_id = "${aws_route_table.rt_public.id}"
 }
 
 resource "aws_route_table_association" "rta_public_c" {
-  subnet_id      = aws_subnet.subnet_c.id
-  route_table_id = aws_route_table.rt_public.id
+  subnet_id      = "${aws_subnet.subnet_c.id}"
+  route_table_id = "${aws_route_table.rt_public.id}"
 }
