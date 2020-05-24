@@ -1,44 +1,39 @@
-resource "aws_autoscaling_group" "asg-web" {
-  name                 = "autoscalinggroup-web"
-  max_size             = 5
-  min_size             = 2
-  launch_configuration = "${aws_launch_configuration.foobar.name}"
-  vpc_zone_identifier  = ["${aws_subnet.subnet-az-a.id}", "${aws_subnet.subnet-az-c.id}"]
+resource "aws_autoscaling_policy" "asg_policy_scaleup" {
+  name                   = "ASG Scaleup"
+  scaling_adjustment     = "1"
+  adjustment_type        = "ChangeInCapacity"
+  cooldown               = "300"
+  autoscaling_group_name = "${aws_autoscaling_group.asg-web.name}"
 }
 
-data "aws_ami" "ubuntu" {
-  most_recent = true
-
-  filter {
-    name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-*"]
-  }
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-
-  owners = ["099720109477"] # Canonical
+resource "aws_autoscaling_policy" "asg_policy_scaledown" {
+  name                   = "ASG Scaledown"
+  scaling_adjustment     = "-1"
+  adjustment_type        = "ChangeInCapacity"
+  cooldown               = "300"
+  autoscaling_group_name = "${aws_autoscaling_group.asg-web.name}"
 }
 
-resource "aws_launch_configuration" "as_conf" {
+resource "aws_launch_configuration" "lauch_config" {
   name_prefix   = "terraform-lc-example-"
-  image_id      = "${data.aws_ami.ubuntu.id}"
-  instance_type = "t2.micro"
+  image_id      = "${var.image_id}"
+  instance_type = "${var.instance_type}"
+  associate_public_ip_address = true
 
   lifecycle {
     create_before_destroy = true
   }
 }
 
-resource "aws_autoscaling_group" "bar" {
-  name                 = "terraform-asg-example"
-  launch_configuration = "${aws_launch_configuration.as_conf.name}"
+resource "aws_autoscaling_group" "asg-web" {
+  name                 = "autoscaling-group-web"
+  launch_configuration = "${aws_launch_configuration.foobar.name}"
+  vpc_zone_identifier  = ["${aws_subnet.subnet_a.id}", "${aws_subnet.subnet_c.id}"]
+  max_size             = 3
   min_size             = 1
-  max_size             = 2
-
-  lifecycle {
-    create_before_destroy = true
-  }
+  health_check_grace_period = 300
+  health_check_type = "ELB"
+  force_delete = true
+  target_group_arns = ["${aws_lb_target_group.elb-tg}"]
 }
+

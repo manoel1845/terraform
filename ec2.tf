@@ -1,6 +1,6 @@
 resource "aws_instance" "web-instance" {
-  ami           = "ami-03e1e4abf50e14ded"
-  instance_type = "t2.micro"
+  ami           = "${var.image_id}"
+  instance_type = "${var.instance_type}"
   vpc_security_group_ids = ["${aws_security_group.sg-web.id}"]
   user_data = <<-EOF
     #!/bin/bash

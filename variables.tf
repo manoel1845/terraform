@@ -23,3 +23,11 @@ variable "secret_key" {
 variable "vpc_cidr_block" {
   cidr_block       = "10.10.10.0/24"
 }
+
+variable "instance_type" {
+  intance_type = "t2.micro"
+}
+
+variable "image_id" {
+  image_id = "ami-03e1e4abf50e14ded"
+}
