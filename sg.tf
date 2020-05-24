@@ -25,7 +25,7 @@ resource "aws_security_group" "sg-web" {
 }
 
 resource "aws_security_group" "sg-elb" {
-  name = "${var.name}-sg"
+  name = "elb-sg"
   description = "Allow all inbound traffic"
   vpc_id      = aws_vpc.main.id
 
