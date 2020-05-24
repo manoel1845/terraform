@@ -10,7 +10,7 @@ resource "aws_lb" "elb" {
 }
 
 resource "aws_lb_listener" "elb_listener" {
-  load_balancer_arn = aws_lb.elb_listener.arn
+  load_balancer_arn = aws_lb.elb.arn
   port              = "80"
   protocol          = "HTTP"
 
