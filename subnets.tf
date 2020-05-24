@@ -1,5 +1,5 @@
 resource "aws_subnet" "subnet_a" {
-  vpc_id     = ["${aws_vpc.main.id}"]
+  vpc_id     = aws_vpc.main.id
   cidr_block = "10.10.10.0/25"
   availability_zone = "${var.region}a"
 
@@ -9,7 +9,7 @@ resource "aws_subnet" "subnet_a" {
 }
 
 resource "aws_subnet" "subnet_c" {
-  vpc_id     = ["${aws_vpc.main.id}"]
+  vpc_id     = aws_vpc.main.id
   cidr_block = "10.10.10.128/25"
   availability_zone = "${var.region}c"
 
