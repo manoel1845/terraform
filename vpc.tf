@@ -1,3 +1,7 @@
 resource "aws_vpc" "vpc-main" {
-  cidr_block       = "10.10.10.0/24"
+  cidr_block       = "${var.vpc_cidr_block}"
+
+  tags = {
+    Name = "terraform"
+  }
 }
