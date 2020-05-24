@@ -1,5 +1,5 @@
 resource "aws_security_group" "sg-web" {
-  name = "${var.name}-sg"
+  name = "weg-sg"
   description = "Allow all inbound traffic"
   vpc_id      = "${aws_vpc.vpc-main.id}"
   ingress {
