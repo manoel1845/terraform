@@ -2,7 +2,7 @@ resource "aws_lb" "elb" {
   name               = "elb"
   internal           = false
   load_balancer_type = "application"
-  security_groups    = aws_security_group.sg-elb.id
+  security_groups    = [aws_security_group.sg-elb.id]
   subnets            = ["aws_subnet.subnet_a.elb.id", "aws_subnet.subnet_c.elb.id"]
 
   enable_deletion_protection = false
