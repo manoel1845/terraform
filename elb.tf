@@ -3,7 +3,7 @@ resource "aws_elb" "elb" {
   name = "elb_web"
   security_groups = aws_security_group.sg-elb.id
   cross_zone_load_balancing = true
-  subnets = aws_subnet.subnet_a.elb.id, aws_subnet.subnet_c.elb.id
+  subnets = ["aws_subnet.subnet_a.elb.id", "aws_subnet.subnet_c.elb.id"]
  # instances = ["${aws_instance.web-instance.id}"]
 
   listener {
