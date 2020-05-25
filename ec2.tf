@@ -2,7 +2,7 @@ resource "aws_instance" "web-instance" {
   ami           = var.image_id
   instance_type = var.instance_type
   subnet_id = ["aws_sunet.subnet_a.id"]
-  availability_zone      = "${var.region}b"
+  availability_zone      = ["${var.region}b"]
 
   user_data = <<-EOF
     #!/bin/bash
