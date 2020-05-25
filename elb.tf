@@ -28,7 +28,7 @@ resource "aws_lb_target_group" "elb-tg" {
 }
 
 resource "aws_lb_target_group_attachment" "elb-tg-attach" {
-  target_group_arn = "${aws_lb_target_group.elb-tg.arn}"
-  target_id        = "${aws_instance.web-instance.id}"
+  target_group_arn = aws_lb_target_group.elb-tg.arn
+  target_id        = aws_instance.web-instance.id
   port             = 80
 }
