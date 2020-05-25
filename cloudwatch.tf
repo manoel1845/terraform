@@ -14,7 +14,7 @@ resource "aws_cloudwatch_metric_alarm" "cloudwatch_alarm_up" {
   }
   
   actions_enabled = true
-  alarm_actions     = aws_autoscaling_policy.asg_policy_scaleup.arn
+  alarm_actions     = ["${aws_autoscaling_policy.asg_policy_scaleup.arn}"]
 }
 
 resource "aws_cloudwatch_metric_alarm" "cloudwatch_alarm_down" {
@@ -33,5 +33,5 @@ resource "aws_cloudwatch_metric_alarm" "cloudwatch_alarm_down" {
   }
   
   actions_enabled = true
-  alarm_actions     = aws_autoscaling_policy.asg_policy_scaledown.arn
+  alarm_actions     = ["${aws_autoscaling_policy.asg_policy_scaledown.arn}"]
 }
